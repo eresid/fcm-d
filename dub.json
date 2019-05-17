@@ -1,0 +1,13 @@
+{
+	"name": "fcm-d",
+	"authors": [
+		"Eugene Sakara"
+	],
+	"description": "Firebase Cloud Messaging library written on D language",
+	"copyright": "Copyright © 2017-2019, Eugene Sakara",
+	"license": "MIT",
+	"dependencies": {
+		"requests": "~>1.0.8",
+		"vibe-d:data": "~>0.8.5"
+	}
+}

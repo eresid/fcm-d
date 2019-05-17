@@ -13,6 +13,7 @@
 
 # Executables
 *.exe
+fcm-d
 
 # DUB
 .dub
@@ -22,3 +23,9 @@ docs/
 
 # Code coverage
 *.lst
+
+# dub
+dub.selections.json
+
+# MacOS
+.DS_Store
