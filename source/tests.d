@@ -7,8 +7,7 @@ unittest {
 	import std.json;
 	import std.stdio;
 
-	// auto fcm = new FCMService("api key");
-	auto fcm = new FCMService("AAAAa8SgFxM:APA91bHZf24QK50ZqWnecv4qOgaOCqSnCw1IQp9WPLSw8SA_0DxKj6vUVtP5R6gNn2HHYKK3gVUCu2OP0SRBKmTjmiQbgQJSJZekLU-e9SOkZTptd9HS-qym7oJd7mAkvcFNJDK3apyL");
+	auto fcm = new FCMService("api key");
 
 	auto request = FCMRequest();
 	request.registrationIds ~= "device token";
