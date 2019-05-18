@@ -1,6 +1,34 @@
 # FCM Service
 Firebase Cloud Messaging library written on D language
 
+
+## How to use
+
+```D
+import std.json;
+import std.stdio;
+
+import fcm;
+
+void main {
+	auto fcm = new FCMService("api key");
+
+	auto request = FCMRequest();
+	request.registrationIds ~= "device token";
+
+	JSONValue json;
+	json["field1"] = "foo";
+	json["field2"] = 42.0;
+	json["field3"] = true;
+
+	request.data = json;
+
+	FCMResponse response = fcm.request(request);
+
+	writeln("response: ", response);
+}
+```
+
 ## TODO
 [0.1.0]
 * initial release
