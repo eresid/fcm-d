@@ -1,6 +1,6 @@
 module fcm.FCMResponse;
 
-import vibe.data.json;
+import asdf;
 
 /**
  * Downstream HTTP message response body (JSON).
@@ -12,19 +12,19 @@ struct FCMResponse
 	/**
 	 * Unique ID (number) identifying the multicast message.
 	 */
-	@name("multicast_id")
-	ulong multicastId;
+	@serializationKeys("multicast_id")
+	long multicastId;
 	
 	/**
 	 * Number of messages that were processed without an error.
 	 */
-	@name("success")
+	@serializationKeys("success")
 	int success;
 
 	/**
 	 * Number of messages that could not be processed.
 	 */
-	@name("failure")
+	@serializationKeys("failure")
 	int failure;
 	
 	/**
@@ -33,8 +33,8 @@ struct FCMResponse
 	 * last registration requested by the client app. This is the ID
 	 * that the server should use when sending messages to the device.
 	 */
-	@name("canonical_ids")
-	int canonicalIds;
+	//@serializationKeys("canonical_ids")
+	//int canonicalIds;
 
 	/**
 	 * Array of objects representing the status of the messages
@@ -42,7 +42,8 @@ struct FCMResponse
 	 * request (i.e., for each registration ID in the request, its
 	 * result is listed in the same index in the response).
 	 */
-	@name("results")
+	@serializationIgnoreIn
+	@serializationKeys("results")
 	Result[] results;
 	
 	struct Result
@@ -51,8 +52,8 @@ struct FCMResponse
 		 * String specifying a unique ID for each successfully
 		 * processed message.
 		 */
-		@optional
-		@name("message_id")
+		@serializationIgnoreIn
+		@serializationKeys("message_id")
 		string messageId;
 		
 		/**
@@ -64,8 +65,8 @@ struct FCMResponse
 		 * 
 		 * Optional
 		 */
-		@optional
-		@name("registration_id")
+		@serializationIgnoreIn
+		@serializationKeys("registration_id")
 		string registrationId;
 		
 		/**
@@ -74,8 +75,8 @@ struct FCMResponse
 		 * found in:
 		 * https://firebase.google.com/docs/cloud-messaging/http-server-ref#table9
 		 */
-		@optional
-		@name("error")
+		@serializationIgnoreIn
+		@serializationKeys("error")
 		string error;
 	}
 }

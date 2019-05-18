@@ -5,6 +5,7 @@ import fcm.FCMRequest;
 import fcm.FCMResponse;
 
 import requests;
+import asdf;
 
 import std.stdio;
 import std.conv;
@@ -13,6 +14,7 @@ import vibe.data.json;
 class FCMService : AbstractService {
 
 	private enum SERVER_URL = "https://fcm.googleapis.com/fcm/send";
+	private enum USER_AGENT = "fcm-d 0.1";
 
 	this(string key) {
 		super(key);
@@ -22,7 +24,7 @@ class FCMService : AbstractService {
  		auto request = Request();
     	request.verbosity = 2;
     	request.addHeaders([
-			"User-Agent": "Mars Client 0.4",
+			"User-Agent": USER_AGENT,
 			"Authorization": "key=" ~ serverApiKey,
 			"Content-Type" : "application/json"
 		]);
@@ -30,13 +32,13 @@ class FCMService : AbstractService {
 		writeln(data.serializeToJsonString());
     	
 		auto response = request.post(SERVER_URL, data.serializeToJsonString());
-		
-		writeln(response.responseBody);
-		writeln("StatusCode ", response.code);
+		auto responseBody = cast(string)response.responseBody.data;
 
-		//enforce(StatusCode.isSuccess(response.code),
-		//	"Cannot get result! Status code = " ~ to!string(response.code));
+		writeln("Response Body: ", responseBody);
+		writeln("Status Code ", response.code);
 
-		return FCMResponse();//deserializeJson!FCMResponse(response.responseBody);
+		enforce(response.code == 200, "Cannot get result! Status code = " ~ to!string(response.code));
+
+		return responseBody.deserialize!FCMResponse;
 	}
 }

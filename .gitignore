@@ -14,6 +14,7 @@
 # Executables
 *.exe
 fcm-d
+fcm-d-test-library
 
 # DUB
 .dub
@@ -29,3 +30,6 @@ dub.selections.json
 
 # MacOS
 .DS_Store
+
+# IDEA
+.idea/

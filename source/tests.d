@@ -1,27 +1,30 @@
-import std.stdio;
+module tests;
 
 import fcm;
 
-void main()
-{
+// dub test
+unittest {
 	import vibe.data.json;
-	
+	import std.stdio;
+
 	// auto fcm = new FCMService("api key");
 	auto fcm = new FCMService("AAAAa8SgFxM:APA91bHZf24QK50ZqWnecv4qOgaOCqSnCw1IQp9WPLSw8SA_0DxKj6vUVtP5R6gNn2HHYKK3gVUCu2OP0SRBKmTjmiQbgQJSJZekLU-e9SOkZTptd9HS-qym7oJd7mAkvcFNJDK3apyL");
-	
+
 	auto request = FCMRequest();
 	request.registrationIds ~= "device token";
-	
+
 	Json j2 = Json.emptyObject;
 	j2["field1"] = "foo";
 	j2["field2"] = 42.0;
 	j2["field3"] = true;
-	
+
 	writeln(j2.toString);
-	
+
 	request.data = j2;
 
 	FCMResponse response = fcm.request(request);
-	
+
+	assert(2 != 3);
+
 	writeln("response: ", response);
 }
