@@ -9,7 +9,7 @@ import asdf;
 
 import std.stdio;
 import std.conv;
-import vibe.data.json;
+import std.exception;
 
 class FCMService : AbstractService {
 
@@ -29,9 +29,10 @@ class FCMService : AbstractService {
 			"Content-Type" : "application/json"
 		]);
 
-		writeln(data.serializeToJsonString());
+		auto requestData = data.serializeToJson();
+		writeln("Request Data: ", requestData);
     	
-		auto response = request.post(SERVER_URL, data.serializeToJsonString());
+		auto response = request.post(SERVER_URL, requestData);
 		auto responseBody = cast(string)response.responseBody.data;
 
 		writeln("Response Body: ", responseBody);

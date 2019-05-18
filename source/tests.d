@@ -4,7 +4,7 @@ import fcm;
 
 // dub test
 unittest {
-	import vibe.data.json;
+	import std.json;
 	import std.stdio;
 
 	// auto fcm = new FCMService("api key");
@@ -13,14 +13,14 @@ unittest {
 	auto request = FCMRequest();
 	request.registrationIds ~= "device token";
 
-	Json j2 = Json.emptyObject;
-	j2["field1"] = "foo";
-	j2["field2"] = 42.0;
-	j2["field3"] = true;
+	JSONValue json;
+	json["field1"] = "foo";
+	json["field2"] = 42.0;
+	json["field3"] = true;
 
-	writeln(j2.toString);
+	writeln("json: ", json.toString);
 
-	request.data = j2;
+	request.data = json;
 
 	FCMResponse response = fcm.request(request);
 

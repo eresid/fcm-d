@@ -1,8 +1,9 @@
 module fcm.FCMRequest;
 
 import std.typecons;
+import std.json;
 
-import vibe.data.json;
+import asdf;
 
 /**
  * Targets, options, and payload for downstream HTTP messages (JSON).
@@ -20,9 +21,9 @@ struct FCMRequest
 	 * topic. Do not set this field when sending to multiple topics.
 	 * See condition.
 	 */
-	//@optional
-	//@name("to")
-	//Nullable!string to;
+	@serializationIgnoreOut
+	@serializationKeys("to")
+	Nullable!string to;
 	
 	/**
 	 * This parameter specifies a list of devices (registration tokens,
@@ -33,7 +34,7 @@ struct FCMRequest
 	 * recipients. Multicast messages (sending to more than 1
 	 * registration tokens) are allowed using HTTP JSON format only.
 	 */
-	@name("registration_ids")
+	@serializationKeys("registration_ids")
 	string[] registrationIds;
 
 	/**
@@ -46,18 +47,18 @@ struct FCMRequest
 	 * Supported operators: &&, ||. Maximum two operators per topic
 	 * message supported.
 	 */
-	//@optional
-	//@name("condition")
-	//Nullable!string condition;
+	@serializationIgnoreOut
+	@serializationKeys("condition")
+	Nullable!string condition;
 
 	/**
 	 * This parameter is deprecated. Instead, use to to specify message
 	 * recipients. For more information on how to send messages to
 	 * multiple devices, see the documentation for your platform.
 	 */
-	//@optional
-	//@name("notification_key")
-	//deprecated Nullable!string notificationKey;
+	@serializationIgnoreOut
+	@serializationKeys("notification_key")
+	deprecated Nullable!string notificationKey;
 
 	// Options
 	
@@ -78,9 +79,9 @@ struct FCMRequest
 	 * client app. If you exceed this number, there is no guarantee
 	 * which 4 collapse keys the FCM connection server will keep.
 	 */
-	//@optional
-	//@name("collapse_key")
-	//Nullable!string collapseKey;
+	@serializationIgnoreOut
+	@serializationKeys("collapse_key")
+	Nullable!string collapseKey;
 
 	/**
 	 * Sets the priority of the message. Valid values are "normal"
@@ -101,9 +102,9 @@ struct FCMRequest
 	 * 
 	 * https://firebase.google.com/docs/cloud-messaging/concept-options#setting-the-priority-of-a-message
 	 */
-	//@optional
-	//@name("priority")
-	//Nullable!string priority;
+	@serializationIgnoreOut
+	@serializationKeys("priority")
+	Nullable!string priority;
 	
 	/**
 	 * On iOS, use this field to represent content-available in the
@@ -112,9 +113,9 @@ struct FCMRequest
 	 * data messages wake the app by default. On Chrome, currently not
 	 * supported.
 	 */
-	//@optional
-	//@name("content_available")
-	//Nullable!bool contentAvailable;
+	@serializationIgnoreOut
+	@serializationKeys("content_available")
+	Nullable!bool contentAvailable;
 	
 	/**
 	 * This parameter specifies how long (in seconds) the message
@@ -125,18 +126,18 @@ struct FCMRequest
 	 * 
 	 * https://firebase.google.com/docs/cloud-messaging/concept-options#ttl
 	 */
-	//@optional
-	//@name("time_to_live")
-	//Nullable!int timeToLive;
+	@serializationIgnoreOut
+	@serializationKeys("time_to_live")
+	Nullable!int timeToLive;
 	
 	/**
 	 * This parameter specifies the package name of the application
 	 * where the registration tokens must match in order to receive
 	 * the message.
 	 */
-	//@optional
-	//@name("restricted_package_name")
-	//Nullable!string restrictedPackageName;
+	@serializationIgnoreOut
+	@serializationKeys("restricted_package_name")
+	Nullable!string restrictedPackageName;
 	
 	/**
 	 * This parameter, when set to true, allows developers to test a
@@ -144,9 +145,9 @@ struct FCMRequest
 	 * 
 	 * The default value is false.
 	 */
-	//@optional
-	//@name("dry_run")
-	//Nullable!bool dryRun;
+	//@serializationIgnoreOut
+	@serializationKeys("dry_run")
+	Nullable!bool dryRun;
 	
 	// Payload
 
@@ -172,9 +173,9 @@ struct FCMRequest
 	 * values in objects or other non-string data types (e.g.,
 	 * integers or booleans) to string.
 	 */
-	@optional
-	@name("data")
-	Nullable!Json data;
+	@serializationIgnoreOut
+	@serializationKeys("data")
+	Nullable!JSONValue data;
 
 	/**
 	 * This parameter specifies the predefined, user-visible key-value
@@ -183,7 +184,7 @@ struct FCMRequest
 	 * message and data message options, see Payload:
 	 * https://firebase.google.com/docs/cloud-messaging/concept-options#notifications_and_data_messages
 	 */
-	//@optional
-	//@name("notification")
-	//Nullable!Json notification;
+	@serializationIgnoreOut
+	@serializationKeys("notification")
+	Nullable!JSONValue notification;
 }
