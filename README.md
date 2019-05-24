@@ -31,7 +31,7 @@ void main {
 
 ## TODO
 [0.2.0]
-* Changed API, not use `FCMService.newInstance("api key")` to get FCM instance
+* Changed API, now use `FCMService.newInstance("api key")` to get FCM instance
 
 [0.1.0]
 * initial release
