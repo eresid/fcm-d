@@ -7,7 +7,7 @@ unittest {
 	import std.json;
 	import std.stdio;
 
-	auto fcm = new FCMService("api key");
+    FCMService fcm = FCMService.newInstance("api key");
 
 	auto request = FCMRequest();
 	request.registrationIds ~= "device token";
@@ -22,8 +22,6 @@ unittest {
 	request.data = json;
 
 	FCMResponse response = fcm.request(request);
-
-	assert(2 != 3);
 
 	writeln("response: ", response);
 }
