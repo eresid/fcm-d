@@ -11,7 +11,7 @@ import std.stdio;
 import fcm;
 
 void main {
-	auto fcm = new FCMService("api key");
+	FCMService fcm = FCMService.newInstance("api key");
 
 	auto request = FCMRequest();
 	request.registrationIds ~= "device token";
@@ -30,6 +30,9 @@ void main {
 ```
 
 ## TODO
+[0.2.0]
+* Changed API, not use `FCMService.newInstance("api key")` to get FCM instance
+
 [0.1.0]
 * initial release
 * Implement [dlang-requests](https://github.com/ikod/dlang-requests) library
